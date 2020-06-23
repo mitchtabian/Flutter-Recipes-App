@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipesapp/screens/category_list_screen.dart';
+import 'package:recipesapp/screens/recipe_detail_screen.dart';
+import 'package:recipesapp/screens/recipe_list_screen.dart';
 
 import 'data/data.dart';
 
@@ -14,8 +16,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Recipes App',
         theme: ThemeData(
-          primaryColor: Colors.white,
-            accentColor: Colors.blue,
+            primaryColor: Colors.blue,
+            accentColor: Colors.blueAccent,
             canvasColor: Color.fromRGBO(249, 249, 249, 1),
             errorColor: Colors.red,
             fontFamily: "Quicksand",
@@ -24,6 +26,12 @@ class MyApp extends StatelessWidget {
                     fontFamily: "OpenSans",
                     fontSize: 21,
                     fontWeight: FontWeight.bold
+                ),
+                headline3: TextStyle(
+                    color: Colors.black,
+                    fontFamily: "OpenSans",
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500
                 ),
                 bodyText1: TextStyle(
                     color: Color.fromRGBO(20, 51, 51, 1)
@@ -44,30 +52,16 @@ class MyApp extends StatelessWidget {
               ),
             )
         ),
-      home: MyHomePage(),
+      home: CategoryListScreen(),
+      routes: {
+        RecipeListScreen.routeName: (ctx) => RecipeListScreen(),
+        RecipeDetailScreen.routeName: (ctx) => RecipeDetailScreen(),
+      },
+
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-
-      appBar: AppBar(
-        title: Text("Recipes App"),
-      ),
-      body: CategoryListScreen(Categories),
-    );
-  }
-}
 
 
 

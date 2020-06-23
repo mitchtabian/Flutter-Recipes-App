@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../screens/recipe_list_screen.dart';
 import '../styles.dart';
 
 class CategoryListItem extends StatelessWidget {
@@ -11,14 +12,12 @@ class CategoryListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    MediaQueryData mediaQuery = MediaQuery.of(context);
-
-    print(mediaQuery.size.height);
-
     return InkWell(
       onTap: (){
-
+        Navigator.of(context).pushNamed(
+            RecipeListScreen.routeName,
+            arguments: _title
+        );
       },
       borderRadius: BorderRadius.circular(DefaultCardPadding),
       child: Card(
