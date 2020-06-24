@@ -56,6 +56,7 @@ flutter:
     - assets/images/dinner.jpg
     - assets/images/italian.jpg
     - assets/images/wine.jpg
+    - assets/images/white_background.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

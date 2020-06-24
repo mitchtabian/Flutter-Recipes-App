@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'package:recipesapp/screens/recipe_detail_screen.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/recipe_provider.dart';
+import '../screens/recipe_detail_screen.dart';
 import '../styles.dart';
 
 
@@ -25,9 +27,9 @@ class RecipeListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
+        Provider.of<RecipeProvider>(context, listen: false).setRecipeId(id);
         Navigator.of(context).pushNamed(
-            RecipeDetailScreen.routeName,
-            arguments: id
+            RecipeDetailScreen.routeName
         );
       },
       child: Card(

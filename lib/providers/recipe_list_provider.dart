@@ -30,11 +30,10 @@ class RecipeListProvider with ChangeNotifier{
   }
 
   Future<void> searchAndSetRecipes() async {
-    String url = Constants.SEARCH_URL + "?key=$_key&q=$_query&page=$_page";
+    String url = Constants.SEARCH_RECIPES_URL + "?key=$_key&q=$_query&page=$_page";
     try{
       final response = await http.get(url,);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
-      print(extractedData);
       extractedData.forEach((key, value) {
         if(key == "recipes"){
           var recipesList = value as List<dynamic>;

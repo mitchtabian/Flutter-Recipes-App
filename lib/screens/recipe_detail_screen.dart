@@ -1,34 +1,90 @@
 import 'package:flutter/material.dart';
-import 'package:recipesapp/styles.dart';
-import 'package:recipesapp/widgets/image_banner.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/recipe_provider.dart';
+import '../styles.dart';
 import '../models/recipe.dart';
 
-class RecipeDetailScreen extends StatelessWidget {
+class RecipeDetailScreen extends StatefulWidget {
 
   static const routeName = "/recipe-detail";
 
   @override
+  _RecipeDetailScreenState createState() => _RecipeDetailScreenState();
+}
+
+class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
+
+  Recipe _recipe;
+  var _isLoading = false;
+  var _isInit = false;
+
+  _setIsLoading(bool isLoading){
+    setState(() {
+      _isLoading = isLoading;
+    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    if(!_isInit){
+      _setIsLoading(true);
+      Provider.of<RecipeProvider>(context, listen: false)
+          .searchAndSetRecipe()
+          .then((value) {
+            _setIsLoading(false);
+            _recipe = Provider.of<RecipeProvider>(context, listen: false).getRecipe;
+            print("recipe: ${_recipe}");
+        })
+        .catchError((error){
+          _setIsLoading(false);
+          return showDialog(
+            context: context,
+            builder: (ctx) => AlertDialog(
+              title: Text("Error"),
+              content: Text("Something went wrong getting the data from the server."),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text("Ok"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            ),
+          ).then((value) {
+            Navigator.of(context).pop();
+          });
+        });
+      _isInit = true;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-
-    final recipeId = ModalRoute.of(context).settings.arguments as String;
-
-    final Recipe _recipe = null;
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          _recipe.title,
+          _isLoading ? "Loading..." : _recipe.title,
           softWrap: true,
         ),
       ),
-      body: SingleChildScrollView(
+      body: _isLoading ?
+      Center(
+        child: CircularProgressIndicator(),
+      ):
+      SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            ImageBanner(
-              assetPath: _recipe.image_url,
+            Image.network(
+              _recipe.image_url,
+              height: 250,
+              width: double.infinity,
+              fit: BoxFit.cover,
             ),
             Column(
               children: <Widget>[

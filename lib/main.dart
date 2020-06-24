@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'providers/recipe_provider.dart';
 import 'providers/recipe_list_provider.dart';
 import 'screens/category_list_screen.dart';
 import 'screens/recipe_detail_screen.dart';
@@ -19,6 +20,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context){
             return RecipeListProvider();
+          },
+        ),
+        ChangeNotifierProvider(
+          create: (context){
+            return RecipeProvider();
           },
         ),
       ],
