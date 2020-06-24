@@ -13,27 +13,7 @@ class RecipeDetailScreen extends StatelessWidget {
 
     final recipeId = ModalRoute.of(context).settings.arguments as String;
 
-    final Recipe _recipe = Recipe(
-        id: DateTime.now().toString(),
-        title: "Red Wine-Braised Shortribs", publisher: "Mitch's Recipes",
-        imageUrl: "assets/images/wine.jpg",
-        socialRank: 99.842,
-        ingredients: [
-          "5 pound bone-in beef short ribs, cut crosswise into 2\" pieces",
-          "Kosher salt and freshly ground black pepper",
-          "3 tablespoons vegetable oil",
-          "3 medium onions, chopped",
-          "3 medium carrots, peeled, chopped",
-          "2 celery stalks, chopped",
-          "3 tablespoons all-purpose flour",
-          "1 tablespoon tomato paste",
-          "1 750ml bottle dry red win (preferably Cabernet Sauvignon)",
-          "10 sprigs flat leaf parsley",
-          "8 sprigs oregano",
-          "4 cups low salt beef stock"
-        ],
-        timestamp: DateTime.now()
-    );
+    final Recipe _recipe = null;
 
     return Scaffold(
       appBar: AppBar(
@@ -48,7 +28,7 @@ class RecipeDetailScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             ImageBanner(
-              assetPath: _recipe.imageUrl,
+              assetPath: _recipe.image_url,
             ),
             Column(
               children: <Widget>[

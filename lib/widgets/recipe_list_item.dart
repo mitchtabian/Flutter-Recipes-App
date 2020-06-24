@@ -10,7 +10,7 @@ class RecipeListItem extends StatelessWidget {
   final String id;
   final String title;
   final String publisher;
-  final double socialRank;
+  final String socialRank;
   final String imageUrl;
 
   RecipeListItem({
@@ -76,7 +76,7 @@ class RecipeListItem extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "${socialRank.toStringAsFixed(0)}",
+                        "${double.parse(socialRank).toStringAsFixed(0)}",
                         style: TextStyle(
                             color: Theme.of(context).accentColor,
                             fontSize: 15

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/recipe_list_provider.dart';
 import '../screens/recipe_list_screen.dart';
 import '../styles.dart';
 
@@ -14,9 +16,9 @@ class CategoryListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
+        Provider.of<RecipeListProvider>(context, listen: false).setQuery(_title);
         Navigator.of(context).pushNamed(
             RecipeListScreen.routeName,
-            arguments: _title
         );
       },
       borderRadius: BorderRadius.circular(DefaultCardPadding),

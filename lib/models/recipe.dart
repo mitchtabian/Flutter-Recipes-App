@@ -1,19 +1,19 @@
 class Recipe{
 
-  final String id;
+  final String recipe_id;
   final String title;
   final String publisher;
-  final String imageUrl;
-  final double socialRank;
+  final String image_url;
+  final String social_rank;
   final List<String> ingredients;
   final DateTime timestamp;
 
   Recipe({
-    this.id,
+    this.recipe_id,
     this.title,
     this.publisher,
-    this.imageUrl,
-    this.socialRank,
+    this.image_url,
+    this.social_rank,
     this.ingredients,
     this.timestamp
     });
